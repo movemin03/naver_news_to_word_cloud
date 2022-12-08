@@ -62,12 +62,12 @@ def wordcloud():
 
     if yes_or_no == "yes":
         print("가로값: ")
-        width = input()
+        width = input(int())
         print("세로값: ")
-        height = input()
+        height = input(int())
     else:
-        width = 400
-        height = 400
+        width = 1080
+        height = 1080
 
     yes_or_no = input("별도로 설정할 최대 단어 수가 있나요? 기본은 100개 입니다 yes/no")
 
@@ -106,7 +106,6 @@ def makeUrl(search, start_pg, end_pg):
         start_page = makePgNum(start_pg)
         global url
         url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&start=" + str(start_page)
-        print("생성url: ", url)
         return url
     else:
         urls = []
@@ -114,15 +113,13 @@ def makeUrl(search, start_pg, end_pg):
             page = makePgNum(i)
             url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&start=" + str(page)
             urls.append(url)
-        print("생성url: ", urls)
+        print("생성 url 가공중... 시간이 걸립니다")
         return urls
-    print("생성 url 가공중... 시간이 걸립니다")
 
 def makeUrl_2(search, start_pg, end_pg):
     if start_pg == end_pg:
         start_page = makePgNum(start_pg)
         url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&sort=1&start=" + str(start_page)
-        print("생성url: ", url)
         return url
     else:
         urls = []
@@ -130,9 +127,8 @@ def makeUrl_2(search, start_pg, end_pg):
             page = makePgNum(i)
             url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&sort=1&start=" + str(page)
             urls.append(url)
-        print("생성url: ", urls)
+        print("생성 url 가공중... 시간이 걸립니다")
         return urls
-    print("생성 url 가공중... 시간이 걸립니다")
 
 # html에서 원하는 속성 추출하는 함수 만들기 (기사, 추출하려는 속성값)
 def news_attrs_crawler(articles,attrs):
