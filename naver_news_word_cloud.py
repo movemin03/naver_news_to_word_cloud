@@ -105,7 +105,7 @@ def wordcloud():
     gen = wc.generate_from_frequencies(data)
     plt.figure()
 
-    if yes_or_no_2 == "yes":
+    if yes_or_no_2 == "yes" and mask != None:
         yes_or_no = input("마스크가 지정되어 있습니다. 지정된 마스크의 색을 글씨에 입히시겠습니까? 기본값 no. yes/no 입력")
         if yes_or_no =="yes":
             image_colors = ImageColorGenerator(mask)
