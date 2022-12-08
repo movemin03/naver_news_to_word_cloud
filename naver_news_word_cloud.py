@@ -119,13 +119,13 @@ def makeUrl(search, start_pg, end_pg):
 
 def makeUrl_2(search, start_pg, end_pg):
     if start_pg == end_pg:
-        start_page = makePgNum(start_pg) - 1
+        start_page = makePgNum(start_pg)
         url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&sort=1&start=" + str(start_page)
         print("생성url: ", url)
         return url
     else:
         urls = []
-        for i in range(start_pg - 1, end_pg - 1):
+        for i in range(start_pg, end_pg + 1):
             page = makePgNum(i)
             url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&sort=1&start=" + str(page)
             urls.append(url)
