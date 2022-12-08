@@ -86,12 +86,16 @@ def wordcloud():
             icon_path = icon_path.replace('"', '')
         except:
             pass
-        icon = Image.open(icon_path)
-        plt.imshow(icon)
-        global mask
-        mask = Image.new("RGB", icon.size, (255, 255, 255))
-        mask.paste(icon, icon)
-        mask = np.array(mask)
+        try:
+            icon = Image.open(icon_path)
+            plt.imshow(icon)
+            global mask
+            mask = Image.new("RGB", icon.size, (255, 255, 255))
+            mask.paste(icon, icon)
+            mask = np.array(mask)
+        except ValueError:
+            print ("bad transparency mask 입니다. 마스크 적용이 실패했습니다. 기본형인 사각형으로 진행합니다")
+            mask = None
     else:
         mask = None
         pass
