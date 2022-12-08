@@ -1,0 +1,33 @@
+
+
+
+
+공통 과정 뉴스크롤링1 파이썬 파일 - 워드클라우드 포함/링크 버전.py
+exe 파일은 다음 과정이 필요 없습니다. 그냥 실행하세요
+
+https://www.python.org/downloads/ 통해 파이썬 설치 
+customize installation -> pip, tcl/tk and IDLE, for all users 3개 체크
+-> add python to environment variables 체크
+-> locaton 은 C:\python311\ 으로 하고 install
+시스템 속성 - 고급 - 환경변수 -> 시스템 변수 편집 -> Path -> C:\python311\ 와 C:\python311\Scripts 추가
+
+pip install bs4
+pip install requests
+pip install pandas
+
+------------------------------------------------------------------ 
+여기서부턴 뉴스크롤링1 파이썬 파일 - 워드클라우드 포함 버전.py
+pip install 파일위치\lxml-4.9.0-cp311-cp311-win_amd64.whl
+pip install 파일위치\wordcloud-1.8.1-cp311-cp311-win_amd64.whl
+
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
+이곳에서 다운 받고 pip install 하시는 것을 추천드립니다. 
+
+pip install lxml
+pip install wordcloud 시 설치 오류가 발생하는 경우가 있습니다.
+
+https://www.oracle.com/java/technologies/downloads/#jdk19-windows  Java 설치 후
+시스템 속성 - 고급 - 환경변수 -> 시스템 변수 편집 -> 새로 만들기 ->이름: JAVA_HOME 변수 값: C:\Program Files\Java\jdk-19\bin
+시스템 속성 - 고급 - 환경변수 -> 시스템 변수 편집 -> Path -> C:\Program Files\Java\jdk-19\bin
+pip install konlpy
