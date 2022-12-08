@@ -58,7 +58,7 @@ def wordcloud():
     else:
         background = 'white'
 
-    yes_or_no = input("별도로 설정할 가로 세로값이 있나요? 기본은 가로*세로 400px*400px 입니다 yes/no")
+    yes_or_no = input("별도로 설정할 가로 세로값이 있나요? 기본은 가로*세로 1080px*1080px 입니다 yes/no")
 
     if yes_or_no == "yes":
         print("가로값: ")
