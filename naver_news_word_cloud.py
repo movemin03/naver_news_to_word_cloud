@@ -116,6 +116,7 @@ def makeUrl(search, start_pg, end_pg):
             urls.append(url)
         print("생성url: ", urls)
         return urls
+    print("생성 url 가공중... 시간이 걸립니다")
 
 def makeUrl_2(search, start_pg, end_pg):
     if start_pg == end_pg:
