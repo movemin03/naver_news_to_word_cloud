@@ -61,10 +61,16 @@ def wordcloud():
     yes_or_no = input("별도로 설정할 가로 세로값이 있나요? 기본은 가로*세로 1080px*1080px 입니다 yes/no")
 
     if yes_or_no == "yes":
-        print("가로값: ")
-        width = input(int())
-        print("세로값: ")
-        height = input(int())
+        while yes_or_no == "yes":
+            try:
+                print("가로값: ")
+                width = int(input())
+                print("세로값: ")
+                height = int(input())
+                break
+            except:
+                print("숫자만 입력합니다. 다시 입력해주세요")
+                pass
     else:
         width = 1080
         height = 1080
@@ -73,29 +79,45 @@ def wordcloud():
 
     if yes_or_no == "yes":
         print("뽑을 단어 수 지정: ")
-        max_words = input(int())
+        pre_max_words = input()
+        max_words = input(pre_max_words)
     else:
         max_words = int(100)
 
     yes_or_no_2 = input("지정할 마스크가 있나요? yes/no")
 
     if yes_or_no_2 == "yes":
-        print("윈도우10/11 의 경우 해당 파일에 마우스 올리고 오른쪽 클릭 - 경로로 복사 기능 사용 가능, .png까지 입력")
-        icon_path = input("경로 입력: ")
-        try:
-            icon_path = icon_path.replace('"', '')
-        except:
-            pass
-        try:
-            icon = Image.open(icon_path)
-            plt.imshow(icon)
-            global mask
-            mask = Image.new("RGB", icon.size, (255, 255, 255))
-            mask.paste(icon, icon)
-            mask = np.array(mask)
-        except ValueError:
-            print ("bad transparency mask 입니다. 마스크 적용이 실패했습니다. 기본형인 사각형으로 진행합니다")
-            mask = None
+        error = int(0)
+        while error == int(0):
+            print("윈도우10/11 의 경우 해당 파일에 마우스 올리고 오른쪽 클릭 - 경로로 복사 기능 사용 가능, .png까지 입력")
+            icon_path = input("경로 입력: ")
+            try:
+                icon_path = icon_path.replace('"', '')
+            except:
+                pass
+            try:
+                icon = Image.open(icon_path)
+                plt.imshow(icon)
+                global mask
+                mask = Image.new("RGB", icon.size, (255, 255, 255))
+                mask.paste(icon, icon)
+                mask = np.array(mask)
+                break
+            except:
+                print ("에러:bad transparency mask. 배경이 투명인 png 파일이어야 합니다")
+                print("다시 시도하려면 0, 마스크 없이 진행하려면 1을 눌러주세요: ")
+                pre_q_error = input()
+                try:
+                    q_error = int(pre_q_error)
+                except:
+                    print("잘못 입력되었습니다. 다시 한번 시도 후 실패 시 종료됩니다.")
+                    pre_q_error = input()
+                    q_error = int(pre_q_error)
+                if q_error == int(1):
+                    mask = None
+                    break
+                else:
+                    pass
     else:
         mask = None
         pass
@@ -105,11 +127,15 @@ def wordcloud():
     gen = wc.generate_from_frequencies(data)
     plt.figure()
 
-    if yes_or_no_2 == "yes" and mask != None:
+    if yes_or_no_2 == "yes":
         yes_or_no = input("마스크가 지정되어 있습니다. 지정된 마스크의 색을 글씨에 입히시겠습니까? 기본값 no. yes/no 입력")
         if yes_or_no =="yes":
-            image_colors = ImageColorGenerator(mask)
-            plt.imshow(wc.recolor(color_func=image_colors))
+            try:
+                image_colors = ImageColorGenerator(mask)
+                plt.imshow(wc.recolor(color_func=image_colors))
+            except:
+                print("마스크가 정상적으로 등록되지 않았습니다. 기본값으로 진행합니다")
+                plt.imshow(gen)
         else:
             plt.imshow(gen)
     else:
@@ -120,12 +146,12 @@ def wordcloud():
     now_2 = datetime.datetime.now()
     now_2.strftime('%Y%m%d_%H시%M분%S초')
     now_3 = str(now_2).replace(":", "_")
-    wc.to_file('워드클라우드' + str(now_3) + '.png')
+    wc.to_file('워드클라우드_' + str(now_3) + '.png')
     print("변환되었습니다\n")
 
     yes_or_no = input("어떤 단어가 얼마만큼 나왔는지도 확인하고 싶나요? yes/no")
     if yes_or_no == "yes":
-        with open('단어빈도수'+ str(now_3) + '.csv', 'w') as f:
+        with open('단어빈도수_'+ str(now_3) + '.csv', 'w') as f:
             w = csv.writer(f)
             w.writerow(data.keys())
             w.writerow(data.values())
@@ -135,8 +161,6 @@ def wordcloud():
 
     yes_or_no == ""
     yes_or_no_2 == ""
-
-
 
 # 페이지 url 형식에 맞게 바꾸어 주는 함수 만들기
   #입력된 수를 1, 11, 21, 31 ...만들어 주는 함수
