@@ -106,14 +106,8 @@ def wordcloud():
             except:
                 print ("에러:bad transparency mask. 배경이 투명인 png 파일이어야 합니다")
                 print("다시 시도하려면 0, 마스크 없이 진행하려면 1을 눌러주세요: ")
-                pre_q_error = input()
-                try:
-                    q_error = int(pre_q_error)
-                except:
-                    print("잘못 입력되었습니다. 다시 한번 시도 후 실패 시 종료됩니다.")
-                    pre_q_error = input()
-                    q_error = int(pre_q_error)
-                if q_error == int(1):
+                q_error = input()
+                if q_error == "1":
                     mask = None
                     break
                 else:
