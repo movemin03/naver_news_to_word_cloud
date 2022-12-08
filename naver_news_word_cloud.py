@@ -4,7 +4,7 @@ import requests
 import re
 import datetime
 import pandas as pd
-from wordcloud import WordCloud
+from wordcloud import WordCloud, ImageColorGenerator
 import matplotlib.pyplot as plt
 from collections import Counter
 from konlpy.tag import Okt
@@ -35,7 +35,7 @@ def wordcloud():
 
     words = [n for n in nouns if len(n) > 1]  # 단어의 길이가 1개인 것은 제외
 
-    c = Counter(words)  # 위에서 얻은 words를 처리하여 단어별 빈도수 형태의 딕셔너리 데이터를 구함
+    data = Counter(words)  # 위에서 얻은 words를 처리하여 단어별 빈도수 형태의 딕셔너리 데이터를 구함
 
     yes_or_no = input("별도로 설정할 글꼴이 있으신가요? 기본은 맑은 고딕입니다. yes/no")
 
@@ -77,10 +77,40 @@ def wordcloud():
     else:
         max_words = int(100)
 
-    wc = WordCloud(font_path = font, width=width, height=height, scale=2.0, max_font_size=250, max_words = max_words, background_color=background)
-    gen = wc.generate_from_frequencies(c)
+    yes_or_no_2 = input("지정할 마스크가 있나요? yes/no")
+
+    if yes_or_no_2 == "yes":
+        print("윈도우10/11 의 경우 해당 파일에 마우스 올리고 오른쪽 클릭 - 경로로 복사 기능 사용 가능, .png까지 입력")
+        icon_path = input("경로 입력: ")
+        try:
+            icon_path = icon_path.replace('"', '')
+        except:
+            pass
+        icon = Image.open(icon_path)
+        plt.imshow(icon)
+        global mask
+        mask = Image.new("RGB", icon.size, (255, 255, 255))
+        mask.paste(icon, icon)
+        mask = np.array(mask)
+    else:
+        mask = None
+        pass
+
+
+    wc = WordCloud(font_path = font, width=width, height=height, scale=2.0, max_font_size=250, max_words = max_words, background_color=background, mask=mask)
+    gen = wc.generate_from_frequencies(data)
     plt.figure()
-    plt.imshow(gen)
+
+    if yes_or_no_2 == "yes":
+        yes_or_no = input("마스크가 지정되어 있습니다. 지정된 마스크의 색을 글씨에 입히시겠습니까? 기본값 no. yes/no 입력")
+        if yes_or_no =="yes":
+            image_colors = ImageColorGenerator(mask)
+            plt.imshow(wc.recolor(color_func=image_colors))
+        else:
+            plt.imshow(gen)
+    else:
+        plt.imshow(gen)
+
 
     print("사진 파일 변환 중...")
     now_2 = datetime.datetime.now()
@@ -88,6 +118,21 @@ def wordcloud():
     now_3 = str(now_2).replace(":", "_")
     wc.to_file('워드클라우드' + str(now_3) + '.png')
     print("변환되었습니다\n")
+
+    yes_or_no = input("어떤 단어가 얼마만큼 나왔는지도 확인하고 싶나요? yes/no")
+    if yes_or_no == "yes":
+        with open('단어빈도수'+ str(now_3) + '.csv', 'w') as f:
+            w = csv.writer(f)
+            w.writerow(data.keys())
+            w.writerow(data.values())
+        print("파일이 저장되었습니다")
+    else:
+        pass
+
+    yes_or_no == ""
+    yes_or_no_2 == ""
+
+
 
 # 페이지 url 형식에 맞게 바꾸어 주는 함수 만들기
   #입력된 수를 1, 11, 21, 31 ...만들어 주는 함수
