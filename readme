@@ -23,7 +23,7 @@ https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud
 pip install lxml
 pip install wordcloud 시 설치 오류가 발생하는 경우가 있습니다.
 
-https://www.oracle.com/java/technologies/downloads/#jdk19-windows  Java 설치 후
+https://www.oracle.com/java/technologies/downloads/#jdk19-windows  JDK설치 후
 시스템 속성 - 고급 - 환경변수 -> 시스템 변수 편집 -> 새로 만들기 ->이름: JAVA_HOME 변수 값: C:\Program Files\Java\jdk-19\bin
 시스템 속성 - 고급 - 환경변수 -> 시스템 변수 편집 -> Path -> C:\Program Files\Java\jdk-19\bin
 pip install konlpy
@@ -37,3 +37,5 @@ pyinstaller --onefile --add-data="C:\\python311\\Lib\site-packages\\konlpy\\;.\k
 작동이 되지 않을 시 JPype 와 Cython 설치를 고려하세요
 pip install JPype1
 pip install Cython
+
+주의사항: pyinstaller 로 exe 파일로 변경하더라도 JDK 설치는 필수입니다.!!!!!!!!!!
