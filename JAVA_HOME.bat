@@ -20,7 +20,7 @@ REM --> If error flag set, we do not have admin.
      if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
      pushd "%CD%"
      CD /D "%~dp0"
- :--------------------------------------
+ :---------------------------------------
 reg delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v "JAVA_HOME" /f
 setx JAVA_HOME "%~dp0jdk-8u191-x64" -m
 setx Path "%Path%; %~dp0jdk-8u191-x64\bin" -m
