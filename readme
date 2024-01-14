@@ -22,6 +22,7 @@ https://github.com/movemin03/naver_news_word_cloud/blob/master/naver_news_word_c
  
 2. 다음은 코드 파일 (py) 사용시 안내사항입니다. (this is a notic for py file user)
   가. 파이썬 설치 (install the python) link: https://www.python.org/downloads/
+jpype 가 파이썬 3.10 버전까지에서만 작동하기 때문에 3.10 버전 사용 필요
   가-1. 파이썬 설치법 (how to install python)
     customize installation -> pip, tcl/tk and IDLE, for all users 3개 체크
     -> add python to environment variables 체크
