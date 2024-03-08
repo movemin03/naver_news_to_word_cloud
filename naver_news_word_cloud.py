@@ -13,6 +13,7 @@ import numpy as np
 import csv
 import sys
 
+print("python 3.10 에서만 사용가능, jpype 때문")
 
 # wordcloud 변경
 def wordcloud():
@@ -290,7 +291,7 @@ def crawling():
         # 뉴스 본문 가져오기
         content = news_html.select("div#dic_area")
         if content == []:
-            content = news_html.select("#articeBody")
+            content = news_html.select("#newsct_article")
 
         # 기사 텍스트만 가져오기
         # list합치기
@@ -301,7 +302,7 @@ def crawling():
         title = re.sub(pattern=pattern1, repl='', string=str(title))
         content = re.sub(pattern=pattern1, repl='', string=content)
         pattern2 = """[\n\n\n\n\n// flash 오류를 우회하기 위한 함수 추가\nfunction _flash_removeCallback() {}"""
-        content = content.replace(pattern2, '')
+        content = content.replace(pattern2, '').replace("[", "").replace("]", "")
 
         news_titles.append(title)
         news_contents.append(content)
