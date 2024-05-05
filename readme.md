@@ -37,9 +37,7 @@ To install konlpy and JPype1, you need to install JDK first.
 and
 Below are the libraries that need to be downloaded and installed separately.
 
-**wordcloud:** download it manually from [here](https://www.autoitscript.com/site/autoit/downloads/).
- and install it using:
-[here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud) and install it using below command
+**wordcloud:** download it manually from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#wordcloud) and install it using below command
 ```python
 pip install folder_path\wordcloud-1.8.1-cp311-cp311-win_amd64.whl
 ```
@@ -52,8 +50,7 @@ pyinstaller --onefile --add-data="C:\\python311\\Lib\site-packages\\konlpy\\;.\k
 ---
 
 #네이버 뉴스를 크롤링한 후 이를 워드클라우드로 변환해주는 프로그램입니다
-[여기](https://github.com/movemin03/naver_news_word_cloud/blob/master/naver_news_word_cloud.exe
-) 링크를 통해 exe 파일을 다운받을 수 있습니다.
+[여기](https://github.com/movemin03/naver_news_word_cloud/blob/master/naver_news_word_cloud.exe) 링크를 통해 exe 파일을 다운받을 수 있습니다.
 
 ## 1. exe 파일 사용시
  가. exe 파일을 다운로드 해주세요.
